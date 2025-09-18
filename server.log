@@ -1,0 +1,34 @@
+[Wed Aug 27 18:24:01 2025] PHP 8.1.2-1ubuntu2.22 Development Server (http://0.0.0.0:8080) started
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60820 Accepted
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60824 Accepted
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60820 [302]: GET /
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60820 Closing
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60824 [200]: GET /pages/login.php
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60824 Closing
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60840 Accepted
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60840 [200]: GET /css/style.css
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60840 Closing
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60850 Accepted
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60850 [404]: GET /images/logo.png - No such file or directory
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60850 Closing
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60866 Accepted
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60866 [200]: GET /js/main.js
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60866 Closing
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60870 Accepted
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60870 [404]: GET /favicon.ico - No such file or directory
+[Wed Aug 27 18:24:15 2025] 127.0.0.1:60870 Closing
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42080 Accepted
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42086 Accepted
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42080 [200]: GET /pages/cadastro.php
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42080 Closing
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42094 Accepted
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42106 Accepted
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42086 [200]: GET /css/style.css
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42086 Closing
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42094 [404]: GET /images/logo.png - No such file or directory
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42094 Closing
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42106 [200]: GET /js/main.js
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42106 Closing
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42122 Accepted
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42122 [200]: GET /css/style.css
+[Wed Aug 27 18:24:55 2025] 127.0.0.1:42122 Closing
