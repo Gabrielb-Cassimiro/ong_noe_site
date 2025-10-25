@@ -284,7 +284,7 @@
                     </div>
                 </div>
                 
-                <!-- Credenciais -->
+                <!-- Credenciais ->
                 <div class="form-section">
                     <h2 class="form-section-title">Credenciais de Acesso</h2>
                     

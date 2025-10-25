@@ -29,7 +29,7 @@ function initializeAccessibility() {
         });
     });
     
-    // Carrega tamanho de fonte salvo
+    // Carrega tamanho de fonte salvo.
     const savedFontSize = localStorage.getItem('font-size');
     if (savedFontSize) {
         document.body.className = document.body.className.replace(/font-\w+/g, '');
