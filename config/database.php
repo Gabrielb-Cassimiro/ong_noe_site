@@ -284,7 +284,7 @@ CREATE TABLE usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(80) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    login VARCHAR(6) UNIQUE NOT NULL,
+    login VARCHAR(12) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
     tipo_usuario ENUM('master', 'comum') NOT NULL DEFAULT 'comum',
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

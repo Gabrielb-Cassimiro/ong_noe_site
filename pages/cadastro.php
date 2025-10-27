@@ -52,7 +52,8 @@
                 <p style="color: var(--light-brown);">Preencha todos os campos obrigatórios</p>
             </div>
             
-            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <form method="POST" action="../config/processa_cadastro.php">
+
                 <!-- Dados Pessoais -->
                 <div class="form-section">
                     <h2 class="form-section-title">Dados Pessoais</h2>
@@ -284,7 +285,7 @@
                     </div>
                 </div>
                 
-                <!-- Credenciais ->
+                <!-- Credenciais -->
                 <div class="form-section">
                     <h2 class="form-section-title">Credenciais de Acesso</h2>
                     
@@ -297,8 +298,8 @@
                                 name="login" 
                                 class="form-input" 
                                 required
-                                maxlength="6"
-                                placeholder="6 caracteres alfabéticos"
+                                maxlength="12"
+                                placeholder="max. 12 caracteres alfabéticos"
                             >
                         </div>
                         
@@ -362,69 +363,8 @@
 
     <script src="../js/main.js"></script>
     
-    <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Coleta e sanitiza os dados
-        $dados = [
-            'nome' => trim($_POST['nome'] ?? ''),
-            'data_nascimento' => trim($_POST['data_nascimento'] ?? ''),
-            'sexo' => trim($_POST['sexo'] ?? ''),
-            'nome_materno' => trim($_POST['nome_materno'] ?? ''),
-            'cpf' => trim($_POST['cpf'] ?? ''),
-            'email' => trim($_POST['email'] ?? ''),
-            'telefone_celular' => trim($_POST['telefone_celular'] ?? ''),
-            'telefone_fixo' => trim($_POST['telefone_fixo'] ?? ''),
-            'cep' => trim($_POST['cep'] ?? ''),
-            'logradouro' => trim($_POST['logradouro'] ?? ''),
-            'numero' => trim($_POST['numero'] ?? ''),
-            'complemento' => trim($_POST['complemento'] ?? ''),
-            'bairro' => trim($_POST['bairro'] ?? ''),
-            'cidade' => trim($_POST['cidade'] ?? ''),
-            'estado' => trim($_POST['estado'] ?? ''),
-            'login' => trim($_POST['login'] ?? ''),
-            'senha' => trim($_POST['senha'] ?? ''),
-            'confirma_senha' => trim($_POST['confirma_senha'] ?? '')
-        ];
-        
-        $erros = [];
-        
-        // Validações
-        if (strlen($dados['nome']) < 15 || strlen($dados['nome']) > 80) {
-            $erros[] = 'Nome deve ter entre 15 e 80 caracteres';
-        }
-        
-        if (!preg_match('/^[a-zA-ZÀ-ÿ\s]+$/', $dados['nome'])) {
-            $erros[] = 'Nome deve conter apenas letras';
-        }
-        
-        if (strlen($dados['login']) !== 6 || !ctype_alpha($dados['login'])) {
-            $erros[] = 'Login deve ter exatamente 6 caracteres alfabéticos';
-        }
-        
-        if (strlen($dados['senha']) < 8) {
-            $erros[] = 'Senha deve ter pelo menos 8 caracteres';
-        }
-        
-        if ($dados['senha'] !== $dados['confirma_senha']) {
-            $erros[] = 'Senhas não coincidem';
-        }
-        
-        if (empty($erros)) {
-            // Em um sistema real, aqui seria feita a inserção no banco de dados
-            // Por enquanto, apenas simula o sucesso
-            echo "<script>
-                showAlert('Cadastro realizado com sucesso! Redirecionando para login...', 'success');
-                setTimeout(() => {
-                    window.location.href = 'login.php';
-                }, 3000);
-            </script>";
-        } else {
-            foreach ($erros as $erro) {
-                echo "<script>showAlert('$erro', 'error');</script>";
-            }
-        }
-    }
-    ?>
+    
+
 </body>
 </html>
 

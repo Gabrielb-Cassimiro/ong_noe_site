@@ -151,12 +151,12 @@ function validateField(event) {
             }
             break;
             
-        case 'login':
-            if (value.length !== 6 || !/^[a-zA-Z]+$/.test(value)) {
-                showFieldError(field, 'Login deve ter exatamente 6 caracteres alfabéticos');
-                return false;
-            }
-            break;
+        // case 'login':
+        //     if (value.length !== 6 || !/^[a-zA-Z]+$/.test(value)) {
+        //         showFieldError(field, 'Login deve ter exatamente 6 caracteres alfabéticos');
+        //         return false;
+        //     }
+        //     break;
             
         case 'senha':
             if (value.length < 8) {
@@ -208,30 +208,40 @@ function showFieldError(field, message) {
     field.parentNode.appendChild(errorDiv);
 }
 
-function handleFormSubmit(event) {
+async function handleFormSubmit(event) {
     event.preventDefault();
-    
     const form = event.target;
     const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
     let isValid = true;
-    
-    inputs.forEach(input => {
-        if (!validateField({ target: input })) {
-            isValid = false;
-        }
-    });
-    
-    if (isValid) {
-        showLoading(form);
-        // Aqui seria feita a submissão real do formulário
-        setTimeout(() => {
-            hideLoading(form);
-            showAlert('Formulário enviado com sucesso!', 'success');
-        }, 2000);
-    } else {
+    inputs.forEach(input => { if (!validateField({ target: input })) isValid = false; });
+
+    if (!isValid) {
         showAlert('Por favor, corrija os erros no formulário', 'error');
+        return;
+    }
+
+    showLoading(form);
+    try {
+        const resp = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form)
+        });
+        const data = await resp.json();
+        hideLoading(form);
+        if (data.status === 'sucesso') {
+            showAlert('Cadastro realizado com sucesso!', 'success');
+            setTimeout(() => { window.location.href = 'login.php'; }, 1500);
+        } else {
+            const mensagens = data.mensagens || ['Erro desconhecido'];
+            mensagens.forEach(m => showAlert(m, 'error'));
+        }
+    } catch (err) {
+        hideLoading(form);
+        showAlert('Erro de comunicação com o servidor', 'error');
+        console.error(err);
     }
 }
+
 
 // Máscaras de entrada
 function applyCPFMask(event) {

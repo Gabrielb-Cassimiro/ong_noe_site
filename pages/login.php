@@ -1,3 +1,39 @@
+<?php
+session_start();
+require_once '../config/config.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $login = trim($_POST['login'] ?? '');
+    $senha = trim($_POST['senha'] ?? '');
+
+    if (empty($login) || empty($senha)) {
+        echo "<script>alert('Por favor, preencha todos os campos.');</script>";
+    } else {
+        try {
+            $stmt = $conn->prepare("SELECT id_usuario, nome, login, senha, tipo_usuario FROM usuarios WHERE login = :login");
+            $stmt->execute([':login' => $login]);
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($usuario && password_verify($senha, $usuario['senha'])) {
+                // Cria a sessão
+                $_SESSION['user_id'] = $usuario['id_usuario'];
+                $_SESSION['user_login'] = $usuario['login'];
+                $_SESSION['user_type'] = $usuario['tipo_usuario'];
+                $_SESSION['user_name'] = $usuario['nome'];
+
+                // Redireciona para o 2FA
+                header('Location: 2fa.php');
+                exit;
+            } else {
+                echo "<script>alert('Login ou senha incorretos.');</script>";
+            }
+        } catch (PDOException $e) {
+            echo "<script>alert('Erro de banco de dados: " . addslashes($e->getMessage()) . "');</script>";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -18,7 +54,7 @@
                 <p style="color: var(--primary-brown); margin-top: var(--spacing-sm);">#5C4033</p>
             </div>
             
-            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <form method="POST" action="">
                 <div class="form-group">
                     <label for="login" class="form-label">Login</label>
                     <input 
@@ -27,8 +63,8 @@
                         name="login" 
                         class="form-input" 
                         required 
-                        maxlength="6"
-                        placeholder="Digite seu login (6 caracteres)"
+                        maxlength="12"
+                        placeholder="Digite seu login"
                     >
                 </div>
                 
@@ -61,67 +97,5 @@
             </div>
         </div>
     </div>
-    
-    <!-- Controles de Acessibilidade  -->
-    <div style="position: fixed; top: 20px; right: 20px; display: flex; gap: 8px; z-index: 1000;">
-        <button id="contrast-toggle" class="accessibility-btn" title="Alternar Contraste">
-            🌓
-        </button>
-        <button data-font-action="decrease" class="accessibility-btn" title="Diminuir Fonte">
-            A-
-        </button>
-        <button data-font-action="increase" class="accessibility-btn" title="Aumentar Fonte">
-            A+
-        </button>
-    </div>
-
-    <script src="../js/main.js"></script>
-    
-    <?php
-    session_start();
-    
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $login = trim($_POST['login'] ?? '');
-        $senha = trim($_POST['senha'] ?? '');
-        
-        // Validações básicas
-        if (empty($login) || empty($senha)) {
-            echo "<script>showAlert('Por favor, preencha todos os campos', 'error');</script>";
-        } elseif (strlen($login) !== 6 || !ctype_alpha($login)) {
-            echo "<script>showAlert('Login deve ter exatamente 6 caracteres alfabéticos', 'error');</script>";
-        } elseif (strlen($senha) < 8) {
-            echo "<script>showAlert('Senha deve ter pelo menos 8 caracteres', 'error');</script>";
-        } else {
-            // Simulação de autenticação
-            // Em um sistema real, aqui seria feita a consulta no banco de dados
-            
-            // Usuário Master padrão: admin / admin123
-            if ($login === 'admin' && $senha === 'admin123') {
-                $_SESSION['user_id'] = 1;
-                $_SESSION['user_login'] = $login;
-                $_SESSION['user_type'] = 'master';
-                $_SESSION['user_name'] = 'Administrador';
-                
-                // Redireciona para 2FA
-                header('Location: 2fa.php');
-                exit();
-            }
-            // Usuário comum de exemplo: user01 / user1234
-            elseif ($login === 'user01' && $senha === 'user1234') {
-                $_SESSION['user_id'] = 2;
-                $_SESSION['user_login'] = $login;
-                $_SESSION['user_type'] = 'comum';
-                $_SESSION['user_name'] = 'Usuário Comum';
-                
-                // Redireciona para 2FA
-                header('Location: 2fa.php');
-                exit();
-            } else {
-                echo "<script>showAlert('Login ou senha incorretos', 'error');</script>";
-            }
-        }
-    }
-    ?>
 </body>
 </html>
-
