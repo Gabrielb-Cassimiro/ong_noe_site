@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <img src="../images/logo.png" alt="Logo ONG de Noé" onerror="this.style.display='none'">
                     <h1>ONG de Noé</h1>
                 </div>
-                <p style="color: var(--primary-brown); margin-top: var(--spacing-sm);">#5C4033</p>
+                <p style="color: var(--primary-brown); margin-top: var(--spacing-sm);">ONG de Noé</p>
             </div>
             
             <form method="POST" action="">
