@@ -62,7 +62,7 @@
         </div>
     </div>
     
-    <!-- Controles de Acessibilidade -->
+    <!-- Controles de Acessibilidade  -->
     <div style="position: fixed; top: 20px; right: 20px; display: flex; gap: 8px; z-index: 1000;">
         <button id="contrast-toggle" class="accessibility-btn" title="Alternar Contraste">
             🌓

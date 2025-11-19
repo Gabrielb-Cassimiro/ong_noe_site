@@ -1,12 +1,12 @@
 <?php
-/**
+/*
  * Funções Auxiliares do Sistema
  * ONG de Noé - Sistema de Gestão
  */
 
 require_once __DIR__ . '/../config/database.php';
 
-/**
+/*
  * Inicia sessão segura se não estiver ativa
  */
 function startSecureSession() {
