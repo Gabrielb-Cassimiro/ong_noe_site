@@ -33,7 +33,7 @@ function isLoggedIn() {
 }
 
 /**
- * Verifica se o usuário passou pelo 2FA
+ * Verifica se o usuário passou pelo 2FA (não mexe mais aqui q eu não sei refazer,só funcionou...)
  */
 function is2FAVerified() {
     startSecureSession();
@@ -59,7 +59,7 @@ function requireLogin() {
 }
 
 /**
- * Redireciona para 2FA se não estiver verificado
+ * Redireciona para 2FA se não estiver verificado (não mexe)
  */
 function require2FA() {
     requireLogin();
@@ -165,7 +165,7 @@ function validateInput($data, $rules) {
             continue;
         }
         
-        // Se campo não é obrigatório e está vazio, pula validações
+        // Se campo não é obrigatório e está vazio, pula validação
         if (empty($value) && (!isset($rule['required']) || !$rule['required'])) {
             continue;
         }
@@ -209,7 +209,7 @@ function validateInput($data, $rules) {
 }
 
 /**
- * Gera pergunta aleatória para 2FA
+ * Gera pergunta aleatória para 2FA (não mexe)
  */
 function generate2FAQuestion($userData) {
     $questions = [
@@ -237,7 +237,7 @@ function generate2FAQuestion($userData) {
 }
 
 /**
- * Verifica resposta do 2FA
+ * Verifica resposta do 2FA (não mexe)
  */
 function verify2FAAnswer($questionKey, $userAnswer, $correctAnswer) {
     $userAnswer = strtolower(trim($userAnswer));
@@ -254,7 +254,7 @@ function verify2FAAnswer($questionKey, $userAnswer, $correctAnswer) {
 }
 
 /**
- * Envia email (simulado - em produção usaria um serviço real)
+ * Envia email (simulado em produção usaria um serviço real)
  */
 function sendEmail($to, $subject, $message, $from = 'noreply@ongdenoe.org') {
     // Em produção, implementaria envio real de email
@@ -444,7 +444,7 @@ function cpfExists($cpf, $excludeUserId = null) {
 }
 
 /**
- * Função para debug (apenas em desenvolvimento)
+ * Função para debug (apenas em desenv)
  */
 function debug($data, $die = false) {
     if (ENVIRONMENT === 'development') {

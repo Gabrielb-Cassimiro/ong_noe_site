@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $erros = [];
 
-    // Validações básicas
+    // Validações
     if (strlen($dados['nome']) < 15 || strlen($dados['nome']) > 80) {
         $erros[] = 'Nome deve ter entre 15 e 80 caracteres.';
     }
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Criptografa a senha
         $hash = password_hash($dados['senha'], PASSWORD_ARGON2ID);
 
-        // Inserir usuário
+        // Insere usuário
         $stmt = $conn->prepare("
             INSERT INTO usuarios (nome, email, login, senha)
             VALUES (:nome, :email, :login, :senha)
